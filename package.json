@@ -1,5 +1,5 @@
 {
-  "name": "redux-starter",
+  "name": "tunnel-watch",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack src/main.js"
@@ -21,11 +21,12 @@
     "history": "^1.12.5",
     "immutable": "^3.7.5",
     "isomorphic-fetch": "2.1.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
+    "leaflet": "^0.7.5",
+    "react": "^0.14.1",
+    "react-dom": "^0.14.1",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
-    "redux": "3.0.2",
+    "redux": "3.0.4",
     "redux-logger": "1.0.9",
     "redux-thunk": "1.0.0"
   }

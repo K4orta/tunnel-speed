@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './connector/connector';
+import Component from './connector/map-connector';
 import { Provider } from 'react-redux';
 
 import configStore from './store/configure-store';

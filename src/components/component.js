@@ -1,7 +1,14 @@
 import React from 'react';
+import Map from './map';
+
+require('./main.scss');
 
 export default class Component extends React.Component {
   render() {
-    return <div>{this.props.msg}</div>;
+    return (
+        <div>
+          <Map {...this.props} />
+        </div>
+    );
   }
 }
