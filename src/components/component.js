@@ -1,4 +1,5 @@
 import React from 'react';
+import Routes from './map/routes';
 require('./main.scss');
 
 class Component extends React.Component {
@@ -7,7 +8,8 @@ class Component extends React.Component {
       return null;
     }
     return (
-        <div>
+        <div className="app-container">
+          <Routes />
         </div>
     );
   }

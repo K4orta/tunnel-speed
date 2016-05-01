@@ -14,7 +14,7 @@ module.exports = {
     contentBase: './public',
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.json'],
     modules: [
       path.resolve('src'),
       'node_modules',
@@ -26,6 +26,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json'],
       },
       {
         test: /\.scss$/,
