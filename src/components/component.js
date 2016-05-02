@@ -1,5 +1,5 @@
 import React from 'react';
-import Routes from './map/routes';
+import Map from './map/map';
 require('./main.scss');
 
 class Component extends React.Component {
@@ -7,12 +7,17 @@ class Component extends React.Component {
     if (!this.props) {
       return null;
     }
+
     return (
         <div className="app-container">
-          <Routes />
+          <Map routes={this.props.map} />
         </div>
     );
   }
 }
+
+Component.propTypes = {
+  map: React.PropTypes.array,
+};
 
 export default Component;

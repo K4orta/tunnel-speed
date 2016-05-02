@@ -2,7 +2,9 @@ import {
   INIT_MAP,
 } from '../actions/map-actions';
 
-export default (state = { map: undefined }, action) => {
+import routeData from '../constants/routes.json';
+
+export default (state = { map: routeData }, action) => {
   switch (action.type) {
     case INIT_MAP:
       return {

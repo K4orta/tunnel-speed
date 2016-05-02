@@ -1,4 +1,5 @@
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
+import routeData from '../constants/routes.json';
 
 export const RECEIVE_ROUTES = 'RECEIVE_ROUTES';
 function receiveRoutes(data) {
@@ -18,10 +19,6 @@ function requestRoutes() {
 export function fetchRoutes() {
   return dispatch => {
     dispatch(requestRoutes());
-    return fetch()
-      .then(resp => resp.json())
-      .then(json => {
-        dispatch(receiveRoutes(json));
-      });
+    dispatch(receiveRoutes(routeData));
   };
 }
