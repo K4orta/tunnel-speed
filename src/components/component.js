@@ -9,15 +9,16 @@ class Component extends React.Component {
     }
 
     return (
-        <div className="app-container">
-          <Map routes={this.props.map} />
-        </div>
+      <div className="app-container">
+        <Map routes={this.props.map} vehicles={this.props.vehicles} />
+      </div>
     );
   }
 }
 
 Component.propTypes = {
   map: React.PropTypes.array,
+  vehicles: React.PropTypes.array,
 };
 
 export default Component;

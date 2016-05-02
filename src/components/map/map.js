@@ -1,6 +1,7 @@
 import React from 'react';
-import { Map, TileLayer, Polyline, Circle } from 'react-leaflet';
-// import Routes from './routes';
+import { Map, TileLayer } from 'react-leaflet';
+import routes from './routes';
+import renderStops from './stops';
 require('./routes.scss');
 
 const colors = {
@@ -18,28 +19,10 @@ class TileMap extends React.Component {
     }
 
     const position = [37.7741, -122.45063];
-    const lines = this.props.routes.map(route =>
-      route.paths.map(path =>
-        <Polyline
-          color={colors[route.title]}
-          opacity={1}
-          weight={8}
-          positions={path.points.map(ll => [ll.lat, ll.lng])}
-        />
-      )
-    );
+    const lines = routes(this.props.routes, colors);
+    const stops = renderStops(this.props.routes, colors);
 
-    const stops = this.props.routes.map(route =>
-      route.stops.map(stop =>
-        (<Circle
-          center={[stop.lat, stop.lng]}
-          radius={10} fillColor="white"
-          fillOpacity={1}
-          color={colors[route.title]}
-          opacity={1}
-        />)
-      )
-    );
+    console.log(this.props);
 
     return (
       <Map center={position} zoom={13}>

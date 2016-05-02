@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
-import reducer from './map-reducer';
+import map from './map-reducer';
+import vehicles from './vehicle-reducer';
 
-export default combineReducers({ reducer });
+export default combineReducers({ map, vehicles });
