@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, TileLayer, Polyline } from 'react-leaflet';
+import { Map, TileLayer, Polyline, Circle } from 'react-leaflet';
 // import Routes from './routes';
 require('./routes.scss');
 
@@ -23,12 +23,24 @@ class TileMap extends React.Component {
         <Polyline
           color={colors[route.title]}
           opacity={1}
+          weight={8}
           positions={path.points.map(ll => [ll.lat, ll.lng])}
         />
       )
     );
 
-    // console.log(this.props.routes[1]);
+    const stops = this.props.routes.map(route =>
+      route.stops.map(stop =>
+        (<Circle
+          center={[stop.lat, stop.lng]}
+          radius={10} fillColor="white"
+          fillOpacity={1}
+          color={colors[route.title]}
+          opacity={1}
+        />)
+      )
+    );
+
     return (
       <Map center={position} zoom={13}>
         <TileLayer
@@ -36,6 +48,7 @@ class TileMap extends React.Component {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'
         />
         {lines}
+        {stops}
       </Map>
     );
   }
