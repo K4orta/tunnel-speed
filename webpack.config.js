@@ -15,6 +15,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.json'],
+    alias: {
+      webworkify: 'webworkify-webpack',
+    },
     modules: [
       path.resolve('src'),
       'node_modules',
@@ -26,6 +29,15 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
+      },
+      {
+        test: /render[\/\\]shaders\.js$/,
+        loader: 'transform/cacheable',
+        query: 'brfs',
+      },
+      {
+        test: /[\/\\]webworkify[\/\\]index.js\.js$/,
+        loader: 'worker',
       },
       {
         test: /\.json$/,

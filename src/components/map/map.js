@@ -1,49 +1,48 @@
 import React from 'react';
-import { Map, TileLayer } from 'react-leaflet';
-import routes from './routes';
-import renderStops from './stops';
-// import { fetchVehicles } from '../../actions/vehicle-actions';
+import MapGL from 'react-map-gl';
 
 require('./routes.scss');
 
-const colors = {
-  'L-Taraval': 'purple',
-  'N-Judah': 'blue',
-  'J-Church': 'orange',
-  'KT-Ingleside/Third Street': 'red',
-  'M-Ocean View': 'green',
-};
-
 class TileMap extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        latitude: 37.7736092599127,
+        longitude: -122.42312591099463,
+        zoom: 12.011557070552028,
+        startDragLngLat: null,
+        isDragging: false,
+        mapboxApiAccessToken: 'pk.eyJ1IjoiZXN5d29uZyIsImEiOiJ1NDRVelhzIn0.xoeElIZkx4qclq5ihnzZvw',
+      },
+    };
+  }
+  _onChangeViewport(vp) {
+    if (this.props.onChangeViewport) {
+      return this.props.onChangeViewport(vp);
+    }
+    this.setState({ viewport: Object.assign({}, this.state.viewport, vp) });
+    return true;
+  }
   render() {
     if (!this.props) {
       return null;
     }
 
-    const position = [37.7741, -122.45063];
-    const lines = routes(this.props.routes, colors);
-    const stops = renderStops(this.props.routes, colors);
-
-
+    const chagevp = this._onChangeViewport.bind(this);
     return (
-      <Map center={position} zoom={13}>
-        <TileLayer
-          url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
-          attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'
-        />
-        {lines}
-        {stops}
+      <MapGL {...this.state.viewport} onChangeViewport={chagevp}>
         {this.props.children}
-      </Map>
+      </MapGL>
     );
   }
 }
 
 TileMap.propTypes = {
-  routes: React.PropTypes.array,
-  map: React.PropTypes.func,
-  vehicles: React.PropTypes.array,
-  children: React.PropTypes.array,
+  onChangeViewport: React.PropTypes.func,
+  children: React.PropTypes.any,
 };
 
 export default TileMap;

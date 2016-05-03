@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from './map/map';
-import renderVehicles from './map/vehicles';
+
 require('./main.scss');
 
 class Component extends React.Component {
@@ -9,12 +9,9 @@ class Component extends React.Component {
   }
   render() {
     if (!this.props) { return null; }
-    const vehicles = renderVehicles(this.props.vehicles);
     return (
       <div className="app-container">
-        <Map routes={this.props.map}>
-          {vehicles}
-        </Map>
+        <Map />
       </div>
     );
   }
