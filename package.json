@@ -29,6 +29,7 @@
     "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-jsx-a11y": "^0.6.2",
     "eslint-plugin-react": "^4.3.0",
+    "gh-pages": "^0.11.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.4.5",
     "node-sass": "^3.6.0",
@@ -39,7 +40,8 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "gh-pages": "node gh-pages"
   },
   "repository": {
     "type": "git",
