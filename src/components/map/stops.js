@@ -6,10 +6,12 @@ export default function (routes, colors) {
     route.stops.map(stop =>
       (<Circle
         center={[stop.lat, stop.lng]}
-        radius={10} fillColor="white"
+        radius={10}
+        fillColor="white"
         fillOpacity={1}
         color={colors[route.title]}
         opacity={1}
+        stroke={false}
       />)
     )
   );

@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Component from '../components/component';
-import * as Actions from '../actions/map-actions';
+import * as Actions from '../actions/vehicle-actions';
 
 const mapStateToProps = (state) => {
   return {

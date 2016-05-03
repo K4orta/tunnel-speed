@@ -6,9 +6,10 @@ export default function (routes, colors) {
     route.paths.map(path =>
       (<Polyline
         color={colors[route.title]}
-        opacity={0.2}
-        weight={8}
+        opacity={0.1}
+        weight={10}
         positions={path.points.map(ll => [ll.lat, ll.lng])}
+        clickable={false}
       />)
     )
   );

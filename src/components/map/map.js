@@ -2,6 +2,8 @@ import React from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import routes from './routes';
 import renderStops from './stops';
+// import { fetchVehicles } from '../../actions/vehicle-actions';
+
 require('./routes.scss');
 
 const colors = {
@@ -22,7 +24,6 @@ class TileMap extends React.Component {
     const lines = routes(this.props.routes, colors);
     const stops = renderStops(this.props.routes, colors);
 
-    console.log(this.props);
 
     return (
       <Map center={position} zoom={13}>
@@ -32,6 +33,7 @@ class TileMap extends React.Component {
         />
         {lines}
         {stops}
+        {this.props.children}
       </Map>
     );
   }
@@ -40,6 +42,8 @@ class TileMap extends React.Component {
 TileMap.propTypes = {
   routes: React.PropTypes.array,
   map: React.PropTypes.func,
+  vehicles: React.PropTypes.array,
+  children: React.PropTypes.array,
 };
 
 export default TileMap;
