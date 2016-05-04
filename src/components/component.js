@@ -11,7 +11,7 @@ class Component extends React.Component {
     if (!this.props) { return null; }
     return (
       <div className="app-container">
-        <Map />
+        <Map routes={this.props.map} />
       </div>
     );
   }
