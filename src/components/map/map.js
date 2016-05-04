@@ -2,8 +2,6 @@ import React from 'react';
 import MapGL from 'react-map-gl';
 import RouteMap from './routes';
 
-require('./routes.scss');
-
 class TileMap extends React.Component {
   constructor() {
     super();
@@ -31,7 +29,6 @@ class TileMap extends React.Component {
     }
 
     const chagevp = this._onChangeViewport.bind(this);
-    // const redraw = this._redraw.bind(this);
     return (
       <MapGL {...this.state.viewport} onChangeViewport={chagevp}>
         <RouteMap viewport={this.state.viewport} routes={this.props.routes} />
