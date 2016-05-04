@@ -1,16 +1,8 @@
 import React from 'react';
 import MapGL from 'react-map-gl';
-import SVGOverlay from 'react-map-gl/dist/overlays/svg.react';
+import RouteMap from './routes';
 
 require('./routes.scss');
-
-const colors = {
-  'L-Taraval': 'purple',
-  'N-Judah': 'blue',
-  'J-Church': 'orange',
-  'KT-Ingleside/Third Street': 'red',
-  'M-Ocean View': 'green',
-};
 
 class TileMap extends React.Component {
   constructor() {
@@ -32,42 +24,17 @@ class TileMap extends React.Component {
     this.setState({ viewport: Object.assign({}, this.state.viewport, vp) });
     return true;
   }
-  _redraw({ project }) {
-    const lines = this.props.routes.map(route => {
-      const segments = route.paths.map((segment, i) => {
-        const points = segment.points.map(p => [p.lng, p.lat]).map(project);
-        return (
-          <path
-            key={`${route.title}-${i}`}
-            d={`M${points.join('L ')}`}
-            stroke={colors[route.title]}
-            strokeWidth={3}
-            fill="none"
-          />
-        );
-      });
-      return (
-        <g key={route.title}>
-          {segments}
-        </g>
-      );
-    });
-    return (
-      <g>
-        {lines}
-      </g>
-    );
-  }
+
   render() {
     if (!this.props) {
       return null;
     }
 
     const chagevp = this._onChangeViewport.bind(this);
-    const redraw = this._redraw.bind(this);
+    // const redraw = this._redraw.bind(this);
     return (
       <MapGL {...this.state.viewport} onChangeViewport={chagevp}>
-        <SVGOverlay {...this.state.viewport} redraw={redraw} />
+        <RouteMap viewport={this.state.viewport} routes={this.props.routes} />
         {this.props.children}
       </MapGL>
     );
