@@ -1,6 +1,7 @@
 import React from 'react';
 import MapGL from 'react-map-gl';
 import RouteMap from './routes';
+import Vehicles from './vehicles';
 
 class TileMap extends React.Component {
   constructor() {
@@ -32,7 +33,7 @@ class TileMap extends React.Component {
     return (
       <MapGL {...this.state.viewport} onChangeViewport={chagevp}>
         <RouteMap viewport={this.state.viewport} routes={this.props.routes} />
-        {this.props.children}
+        <Vehicles viewport={this.state.viewport} vehicles={this.props.vehicles} />
       </MapGL>
     );
   }
@@ -41,7 +42,8 @@ class TileMap extends React.Component {
 TileMap.propTypes = {
   onChangeViewport: React.PropTypes.func,
   children: React.PropTypes.any,
-  routes: React.PropTypes.array,
+  vehicles: React.PropTypes.any,
+  routes: React.PropTypes.any,
 };
 
 export default TileMap;

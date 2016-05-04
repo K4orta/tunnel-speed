@@ -3,10 +3,10 @@ import {
 } from '../actions/vehicle-actions';
 import Immutable from 'immutable';
 
-export default (state = { vehicles: [] }, action) => {
+export default (state = Immutable.List(), action) => {
   switch (action.type) {
     case RECEIVE_VEHICLES:
-      return Object.assign({}, { vehicles: action.routes });
+      return Immutable.fromJS(action.routes);
     default:
       return state;
   }

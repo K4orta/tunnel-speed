@@ -11,7 +11,7 @@ class Component extends React.Component {
     if (!this.props) { return null; }
     return (
       <div className="app-container">
-        <Map routes={this.props.map} />
+        <Map routes={this.props.map} vehicles={this.props.vehicles} />
       </div>
     );
   }
@@ -19,7 +19,7 @@ class Component extends React.Component {
 
 Component.propTypes = {
   map: React.PropTypes.array,
-  vehicles: React.PropTypes.array,
+  vehicles: React.PropTypes.any,
   fetchVehicles: React.PropTypes.func,
 };
 

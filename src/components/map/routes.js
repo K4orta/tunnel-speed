@@ -4,14 +4,17 @@ import SVGOverlay from 'react-map-gl/dist/overlays/svg.react';
 import colors from '../../constants/colors';
 import alphaify from 'alphaify';
 
+const ROUTE_WIDTH = 2;
+const ROUTE_OPACITY = 0.25;
+
 class RouteMap extends React.Component {
   _formatLineSegment(points, route, index) {
     return (
       <path
         key={`${route.title}-${index}`}
         d={`M${points.join('L ')}`}
-        stroke={alphaify(colors[route.title], 0.25)}
-        strokeWidth={8}
+        stroke={alphaify(colors[route.title], ROUTE_OPACITY)}
+        strokeWidth={ROUTE_WIDTH}
         fill="none"
       />
     );

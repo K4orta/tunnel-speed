@@ -6,8 +6,8 @@ import * as Actions from '../actions/vehicle-actions';
 
 const mapStateToProps = (state) => {
   return {
-    map: state.map.map,
-    vehicles: state.vehicles.vehicles,
+    map: state.map,
+    vehicles: state.vehicles,
   };
 };
 const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
