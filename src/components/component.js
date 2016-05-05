@@ -5,7 +5,9 @@ require('./main.scss');
 
 class Component extends React.Component {
   componentDidMount() {
+    const SECOND = 1000;
     this.props.fetchVehicles();
+    setInterval(() => this.props.fetchVehicles(), SECOND * 10);
   }
   render() {
     if (!this.props) { return null; }

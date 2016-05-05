@@ -15,6 +15,7 @@ class TileMap extends React.Component {
         zoom: 12.011557070552028,
         startDragLngLat: null,
         isDragging: false,
+        // Temp key here so this works on gh-pages
         mapboxApiAccessToken: 'pk.eyJ1IjoiZXN5d29uZyIsImEiOiJjaW5yeDJ0M2ExMG8wdHRtMzVwdmR6Z3JlIn0.qYHKtkiks0M8hSKbtlW_Ag',
       },
     };
