@@ -3,7 +3,7 @@ import Map from './map/map';
 
 require('./main.scss');
 
-class Component extends React.Component {
+class App extends React.Component {
   componentDidMount() {
     const SECOND = 1000;
     this.props.fetchVehicles();
@@ -19,10 +19,10 @@ class Component extends React.Component {
   }
 }
 
-Component.propTypes = {
+App.propTypes = {
   map: React.PropTypes.array,
   vehicles: React.PropTypes.any,
   fetchVehicles: React.PropTypes.func,
 };
 
-export default Component;
+export default App;

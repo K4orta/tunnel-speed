@@ -1,6 +1,7 @@
 import React from 'react';
 import SVGOverlay from 'react-map-gl/dist/overlays/svg.react';
-import renderVehicle from './vehicle';
+import Vehicle from './vehicle';
+import kmHrToMph from '../../utils/kmhr-to-mph';
 
 import { COLORS_SHORTNAME as colors } from '../../constants/colors';
 
@@ -10,16 +11,25 @@ class Vehicles extends React.Component {
     const positions = vehicle.get('stats').map((step, i) => {
       const vp = step.get('position');
       const projectedPosition = project([vp.get('lng'), vp.get('lat')]);
-      // Size of the triangle, if it is the last in the list it is larger.
-      const stepSize = i === numSteps - 1 ? 0.7 : 0.4;
-      return renderVehicle({
-        id: `${vehicle.get('id')}-${i}`,
+      const props = {
         lng: projectedPosition[0],
         lat: projectedPosition[1],
-        scale: stepSize,
+        // Size of the triangle, if it is the last in the list it is larger.
+        scale: i === numSteps - 1 ? 0.7 : 0.4,
         color: colors[vehicle.get('route')],
         heading: step.get('heading'),
-      });
+      };
+      return (<Vehicle
+        {...props}
+        key={`${vehicle.get('id')}-${i}`}
+        onClick={() => {
+          const avgKmHr =
+            vehicle.get('stats').reduce((r, v) => r + v.get('speedKmHr'), 0)
+            / vehicle.get('stats').size;
+          const mph = kmHrToMph(avgKmHr);
+          console.log(`MPH: ${mph}`);
+        }}
+      />);
     });
 
     return (

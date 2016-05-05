@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './containers/map-connector';
+import App from './containers/map-container';
 import { Provider } from 'react-redux';
 
 import configStore from './store/configure-store';
@@ -10,7 +10,7 @@ const store = configStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Component />
+    <App />
   </Provider>,
   document.getElementById('app')
 );
