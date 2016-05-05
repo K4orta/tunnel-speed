@@ -11,9 +11,9 @@ class RouteMap extends React.Component {
   _formatLineSegment(points, route, index) {
     return (
       <path
-        key={`${route.title}-${index}`}
+        key={`${route}-${index}`}
         d={`M${points.join('L ')}`}
-        stroke={alphaify(colors[route.title], ROUTE_OPACITY)}
+        stroke={alphaify(colors[route], ROUTE_OPACITY)}
         strokeWidth={ROUTE_WIDTH}
         fill="none"
       />
@@ -21,12 +21,15 @@ class RouteMap extends React.Component {
   }
   _redraw({ project }) {
     const routes = this.props.routes.map(route => {
-      const segments = route.paths.map((segment, i) => {
-        const projectedPoints = segment.points.map(p => [p.lng, p.lat]).map(project);
-        return this._formatLineSegment(projectedPoints, route, i);
+      const segments = route.get('paths').map((segment, i) => {
+        const projectedPoints = segment.get('points')
+          .toSeq()
+          .map(p => [p.get('lng'), p.get('lat')])
+          .map(project);
+        return this._formatLineSegment(projectedPoints, route.get('title'), i);
       });
       return (
-        <g key={route.title}>
+        <g key={route.get('title')}>
           {segments}
         </g>
       );
@@ -46,7 +49,7 @@ class RouteMap extends React.Component {
 
 RouteMap.propTypes = {
   viewport: React.PropTypes.object,
-  routes: React.PropTypes.array,
+  routes: React.PropTypes.any,
 };
 
 export default RouteMap;

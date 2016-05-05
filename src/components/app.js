@@ -20,7 +20,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  map: React.PropTypes.array,
+  map: React.PropTypes.any,
   vehicles: React.PropTypes.any,
   fetchVehicles: React.PropTypes.func,
 };
