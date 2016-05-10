@@ -31,7 +31,7 @@ module.exports = {
         loaders: ['babel-loader'],
       },
       {
-        test: /render[\/\\]shaders\.js$/,
+        test: /render[\/\\]painter[\/\\]use_program\.js$/,
         loader: 'transform/cacheable',
         query: 'brfs',
       },
