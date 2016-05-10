@@ -27,6 +27,7 @@ class Vehicles extends React.Component {
             vehicle.get('stats').reduce((r, v) => r + v.get('speedKmHr'), 0)
             / vehicle.get('stats').size;
           const mph = kmHrToMph(avgKmHr);
+          this.props.selectVehicle(vehicle);
           console.log(`MPH: ${mph}`);
         }}
       />);
@@ -60,6 +61,7 @@ class Vehicles extends React.Component {
 Vehicles.propTypes = {
   vehicles: React.PropTypes.any,
   viewport: React.PropTypes.any,
+  selectVehicle: React.PropTypes.func,
 };
 
 export default Vehicles;

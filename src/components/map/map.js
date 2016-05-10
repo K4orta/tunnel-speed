@@ -29,12 +29,15 @@ class TileMap extends React.Component {
     if (!this.props) {
       return null;
     }
-
     const chagevp = this._onChangeViewport.bind(this);
     return (
       <MapGL {...this.state.viewport} onChangeViewport={chagevp}>
-        <RouteMap viewport={this.state.viewport} routes={this.props.routes} />
-        <Vehicles viewport={this.state.viewport} vehicles={this.props.vehicles} />
+        <RouteMap viewport={this.state.viewport} routes={this.props.map} />
+        <Vehicles
+          viewport={this.state.viewport}
+          vehicles={this.props.vehicles}
+          selectVehicle={this.props.selectVehicle}
+        />
       </MapGL>
     );
   }
@@ -44,7 +47,8 @@ TileMap.propTypes = {
   onChangeViewport: React.PropTypes.func,
   children: React.PropTypes.any,
   vehicles: React.PropTypes.any,
-  routes: React.PropTypes.any,
+  map: React.PropTypes.any,
+  selectVehicle: React.PropTypes.any,
 };
 
 export default TileMap;

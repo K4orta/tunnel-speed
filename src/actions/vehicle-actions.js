@@ -15,6 +15,14 @@ function requestVehicles() {
   };
 }
 
+export const SELECT_VEHICLE = 'SELECT_VEHICLE';
+export function selectVehicle(data) {
+  return {
+    type: SELECT_VEHICLE,
+    vehicle: data,
+  };
+}
+
 export function fetchVehicles() {
   return dispatch => {
     dispatch(requestVehicles());

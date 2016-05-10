@@ -13,7 +13,7 @@ class App extends React.Component {
     if (!this.props) { return null; }
     return (
       <div className="app-container">
-        <Map routes={this.props.map} vehicles={this.props.vehicles} />
+        <Map {...this.props} />
       </div>
     );
   }

@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
   return {
     map: state.map,
     vehicles: state.vehicles,
+    ui: state.ui,
   };
 };
 const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
