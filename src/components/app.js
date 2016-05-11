@@ -1,14 +1,9 @@
 import React from 'react';
-import Map from './map/map';
+import Map from '../containers/map-container';
 
 require('./main.scss');
 
 class App extends React.Component {
-  componentDidMount() {
-    const SECOND = 1000;
-    this.props.fetchVehicles();
-    setInterval(() => this.props.fetchVehicles(), SECOND * 10);
-  }
   render() {
     if (!this.props) { return null; }
     return (

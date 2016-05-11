@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/map-container';
+import App from './components/app';
 import { Provider } from 'react-redux';
 
 import configStore from './store/configure-store';

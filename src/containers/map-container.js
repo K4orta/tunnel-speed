@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import App from '../components/app';
+import Map from '../components/map/map';
 import * as Actions from '../actions/vehicle-actions';
 
 const mapStateToProps = (state) => {
@@ -13,4 +13,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
