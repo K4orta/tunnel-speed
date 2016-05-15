@@ -1,5 +1,6 @@
 import React from 'react';
 import Map from '../containers/map-container';
+import UILayer from '../containers/ui-container';
 
 require('./main.scss');
 
@@ -9,6 +10,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <Map {...this.props} />
+        <UILayer />
       </div>
     );
   }

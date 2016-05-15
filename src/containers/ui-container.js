@@ -2,15 +2,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as Actions from '../actions/vehicle-actions';
-import Map from '../components/map/map';
+import UILayer from '../components/ui/ui-layer';
 
 const mapStateToProps = (state) => {
   return {
-    map: state.map,
-    vehicles: state.vehicles,
+    ui: state.ui,
   };
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(UILayer);
