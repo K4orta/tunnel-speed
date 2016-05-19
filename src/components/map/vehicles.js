@@ -1,15 +1,17 @@
 import React from 'react';
 import SVGOverlay from 'react-map-gl/dist/overlays/svg.react';
 import Vehicle from './vehicle';
-import kmHrToMph from '../../utils/kmhr-to-mph';
 
 class Vehicles extends React.Component {
   _redraw({ project }) {
-    // Filter out trailing vehicles.
-    const vehicles = this.props.vehicles.toSeq()
-      .filter(v => v.get('leadingVehicleId') === '')
+    const vehicles = this.props.vehicles
       .map(v => (
-        <Vehicle data={v} project={project} key={`${v.get('route')}-${v.get('id')}`} />
+        <Vehicle
+          data={v}
+          project={project}
+          key={`${v.get('route')}-${v.get('id')}`}
+          onClick={() => this.props.selectVehicle(v)}
+        />
       ));
     return (
       <g>

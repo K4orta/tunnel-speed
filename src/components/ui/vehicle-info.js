@@ -9,8 +9,8 @@ class VehicleInfo extends React.Component {
     console.log(sv.toJS());
     return (
       <div className="vehicle-info">
-        <div>{sv.get('id')}</div>
-        <div>{sv.get('route')}</div>
+        <div>ID: {sv.get('id')}</div>
+        <div>Route: {sv.get('route')}</div>
         <div>{sv.get('stats').size}</div>
       </div>
     );
