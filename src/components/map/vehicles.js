@@ -1,6 +1,7 @@
 import React from 'react';
 import SVGOverlay from 'react-map-gl/dist/overlays/svg.react';
 import Vehicle from './vehicle';
+import VehicleTrail from './vehicle-trail';
 
 class Vehicles extends React.Component {
   _redraw({ project }) {
@@ -11,7 +12,9 @@ class Vehicles extends React.Component {
           project={project}
           key={`${v.get('route')}-${v.get('id')}`}
           onClick={() => this.props.selectVehicle(v)}
-        />
+        >
+          <VehicleTrail frames={v.get('stats')} project={project} />
+        </Vehicle>
       ));
     return (
       <g>
