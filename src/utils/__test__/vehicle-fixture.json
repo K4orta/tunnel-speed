@@ -1,0 +1,184 @@
+{
+    "id": "1457",
+    "route": "N",
+    "leadingVehicleId": "",
+    "stats": [
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:54:57Z",
+            "position": {
+                "lat": 37.76171,
+                "lng": -122.47682
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:54:47Z",
+            "position": {
+                "lat": 37.76171,
+                "lng": -122.47683
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:54:33Z",
+            "position": {
+                "lat": 37.76171,
+                "lng": -122.47669
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 18
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:54:29Z",
+            "position": {
+                "lat": 37.76175,
+                "lng": -122.47601
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 24
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:54:14Z",
+            "position": {
+                "lat": 37.76176,
+                "lng": -122.4755
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 25
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:54:05Z",
+            "position": {
+                "lat": 37.76183,
+                "lng": -122.47424
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 27
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:53:47Z",
+            "position": {
+                "lat": 37.76185,
+                "lng": -122.47389
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:53:36Z",
+            "position": {
+                "lat": 37.76185,
+                "lng": -122.4739
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 1
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:53:31Z",
+            "position": {
+                "lat": 37.76186,
+                "lng": -122.47358
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 29
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:53:25Z",
+            "position": {
+                "lat": 37.76188,
+                "lng": -122.47289
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 35
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:53:14Z",
+            "position": {
+                "lat": 37.76195,
+                "lng": -122.47131
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 35
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:52:55Z",
+            "position": {
+                "lat": 37.762,
+                "lng": -122.47033
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:52:51Z",
+            "position": {
+                "lat": 37.762,
+                "lng": -122.47034
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:52:39Z",
+            "position": {
+                "lat": 37.7620099,
+                "lng": -122.46999
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 25
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:52:25Z",
+            "position": {
+                "lat": 37.76206,
+                "lng": -122.46928
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        },
+        {
+            "predictable": true,
+            "time": "2016-05-24T04:52:16Z",
+            "position": {
+                "lat": 37.76205,
+                "lng": -122.46929
+            },
+            "heading": 266,
+            "dirTag": "N____O_F00",
+            "speedKmHr": 0
+        }
+    ],
+    "predictable": true
+}

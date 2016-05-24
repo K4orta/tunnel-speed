@@ -33,6 +33,7 @@
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-jsx-a11y": "^0.6.2",
+    "eslint-plugin-mocha": "^2.2.0",
     "eslint-plugin-react": "^4.3.0",
     "gh-pages": "^0.11.0",
     "json-loader": "^0.5.4",
@@ -47,7 +48,7 @@
     "webworkify-webpack": "^1.0.6"
   },
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
+    "test": "cross-env NODE_ENV=test mocha --recursive --require babel-core/register --require ./src/test/setup.js src/**/*-test.js",
     "test:watch": "npm test -- --watch",
     "gh-pages": "node gh-pages"
   },

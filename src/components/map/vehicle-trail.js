@@ -1,11 +1,15 @@
 import React from 'react';
+import haversine from 'haversine';
 
 class VehicleTrail extends React.Component {
   render() {
-    const tail = this.props.frames
+    const positions = this.props.frames
       .toSeq()
-      .map(x => x.get('position'))
+      .map(x => x.get('position'));
+
+    const tail = positions
       .map(pos => this.props.project([pos.get('lng'), pos.get('lat')]));
+
     if (!this.props) return null;
     return (
       <g>
