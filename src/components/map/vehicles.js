@@ -13,7 +13,7 @@ class Vehicles extends React.Component {
           key={`${v.get('route')}-${v.get('id')}`}
           onClick={() => this.props.selectVehicle(v)}
         >
-          <VehicleTrail frames={v.get('stats')} project={project} />
+          <VehicleTrail data={v} frames={v.get('stats')} project={project} />
         </Vehicle>
       ));
     return (

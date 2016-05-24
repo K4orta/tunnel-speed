@@ -3,6 +3,7 @@ import haversine from 'haversine';
 
 class VehicleTrail extends React.Component {
   render() {
+    if (!this.props) return null;
     const positions = this.props.frames
       .toSeq()
       .map(x => x.get('position'));
@@ -10,14 +11,15 @@ class VehicleTrail extends React.Component {
     const tail = positions
       .map(pos => this.props.project([pos.get('lng'), pos.get('lat')]));
 
-    if (!this.props) return null;
+    const strokeColor = this.props.data.get('speed') < 8 ? 'red' : 'green';
+
     return (
       <g>
         <path
           d={`M${tail.join('L')}`}
           style={{
             fill: 'none',
-            stroke: 'green',
+            stroke: strokeColor,
             strokeWidth: 3,
           }}
         />
@@ -28,6 +30,7 @@ class VehicleTrail extends React.Component {
 
 VehicleTrail.propTypes = {
   frames: React.PropTypes.object,
+  data: React.PropTypes.object,
   project: React.PropTypes.func,
 };
 
