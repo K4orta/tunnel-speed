@@ -31741,7 +31741,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var ROUTE_WIDTH = 2;
-	var ROUTE_OPACITY = 0.25;
+	var ROUTE_OPACITY = 0.20;
 
 	var RouteMap = function (_React$Component) {
 	  _inherits(RouteMap, _React$Component);
@@ -31825,10 +31825,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _haversine = __webpack_require__(432);
-
-	var _haversine2 = _interopRequireDefault(_haversine);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31836,6 +31832,15 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function strokeSpeed(speed) {
+	  if (speed < 8) {
+	    return 'red';
+	  } else if (speed < 12) {
+	    return 'orange';
+	  }
+	  return 'green';
+	}
 
 	var VehicleTrail = function (_React$Component) {
 	  _inherits(VehicleTrail, _React$Component);
@@ -31860,19 +31865,25 @@
 	        return _this2.props.project([pos.get('lng'), pos.get('lat')]);
 	      });
 
-	      var strokeColor = this.props.data.get('speed') < 8 ? 'red' : 'green';
-
-	      return _react2.default.createElement(
-	        'g',
-	        null,
-	        _react2.default.createElement('path', {
-	          d: 'M' + tail.join('L'),
+	      var paths = [];
+	      tail.forEach(function (pos, i) {
+	        if (tail.has(i + 1) === false) return;
+	        var strokeColor = strokeSpeed(_this2.props.frames.get(i).get('speed'));
+	        paths.push(_react2.default.createElement('path', {
+	          key: i,
+	          d: 'M' + tail.get(i) + 'L' + tail.get(i + 1),
 	          style: {
 	            fill: 'none',
 	            stroke: strokeColor,
 	            strokeWidth: 3
 	          }
-	        })
+	        }));
+	      });
+
+	      return _react2.default.createElement(
+	        'g',
+	        null,
+	        paths
 	      );
 	    }
 	  }]);
@@ -31937,24 +31948,19 @@
 
 	      return _react2.default.createElement(
 	        'g',
-	        null,
-	        this.props.children,
-	        _react2.default.createElement(
-	          'g',
-	          {
-	            transform: 'translate(' + latlng[0] + ',' + latlng[1] + ')'
-	          },
-	          _react2.default.createElement('polygon', {
-	            points: '-7,7 0,-7 7,7',
-	            transform: 'rotate(' + v.get('heading') + ')',
-	            onClick: this.props.onClick,
-	            style: {
-	              fill: _colors.COLORS_SHORTNAME[data.get('route')],
-	              pointerEvents: 'all',
-	              cursor: 'pointer'
-	            }
-	          })
-	        )
+	        {
+	          transform: 'translate(' + latlng[0] + ',' + latlng[1] + ')'
+	        },
+	        _react2.default.createElement('polygon', {
+	          points: '-7,7 0,-7 7,7',
+	          transform: 'rotate(' + v.get('heading') + ')',
+	          onClick: this.props.onClick,
+	          style: {
+	            fill: _colors.COLORS_SHORTNAME[data.get('route')],
+	            pointerEvents: 'all',
+	            cursor: 'pointer'
+	          }
+	        })
 	      );
 	    }
 	  }]);
@@ -32026,24 +32032,40 @@
 
 	      var project = _ref.project;
 
-	      var vehicles = this.props.vehicles.map(function (v) {
-	        return _react2.default.createElement(
-	          _vehicle2.default,
-	          {
-	            data: v,
-	            project: project,
-	            key: v.get('route') + '-' + v.get('id'),
-	            onClick: function onClick() {
-	              return _this2.props.selectVehicle(v);
-	            }
-	          },
-	          _react2.default.createElement(_vehicleTrail2.default, { data: v, frames: v.get('stats'), project: project })
-	        );
+	      var vehicles = [];
+	      var trails = [];
+
+	      this.props.vehicles.forEach(function (v) {
+	        var id = v.get('route') + '-' + v.get('id');
+	        vehicles.push(_react2.default.createElement(_vehicle2.default, {
+	          data: v,
+	          project: project,
+	          key: id,
+	          onClick: function onClick() {
+	            return _this2.props.selectVehicle(v);
+	          }
+	        }));
+	        trails.push(_react2.default.createElement(_vehicleTrail2.default, {
+	          data: v,
+	          frames: v.get('stats'),
+	          project: project,
+	          key: id
+	        }));
 	      });
+
 	      return _react2.default.createElement(
 	        'g',
 	        null,
-	        vehicles
+	        _react2.default.createElement(
+	          'g',
+	          { className: 'trail-layer' },
+	          trails
+	        ),
+	        _react2.default.createElement(
+	          'g',
+	          { className: 'vehicle-layer' },
+	          vehicles
+	        )
 	      );
 	    }
 	  }, {
@@ -32237,7 +32259,7 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    map: state.map,
-	    vehicles: state.vehicles
+	    vehicles: state.vehicles.get('vehicles')
 	  };
 	};
 
@@ -32262,6 +32284,10 @@
 
 	var _reactRedux = __webpack_require__(69);
 
+	var _immutable = __webpack_require__(49);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
 	var _vehicleActions = __webpack_require__(48);
 
 	var Actions = _interopRequireWildcard(_vehicleActions);
@@ -32270,13 +32296,15 @@
 
 	var _uiLayer2 = _interopRequireDefault(_uiLayer);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    ui: state.ui
+	    ui: _immutable2.default.Map({
+	      selectedVehicle: state.vehicles.get('selectedVehicle')
+	    })
 	  };
 	};
 
@@ -32444,14 +32472,25 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function () {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? _immutable2.default.List() : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? _immutable2.default.fromJS({ vehicles: [], selectedVehicle: undefined }) : arguments[0];
 	  var action = arguments[1];
 
+	  var vhe = void 0;
 	  switch (action.type) {
+	    case _vehicleActions.SELECT_VEHICLE:
+	      return state.set('selectedVehicle', action.vehicle);
 	    case _vehicleActions.RECEIVE_VEHICLES:
-	      return _immutable2.default.fromJS(action.routes).toSeq().filter(function (v) {
+	      vhe = state.set('vehicles', _immutable2.default.fromJS(action.routes).toSeq().filter(function (v) {
 	        return v.get('leadingVehicleId') === '' && v.get('predictable') === true;
-	      }).map(_vehicleDistance2.default);
+	      }).map(_vehicleDistance2.default));
+
+	      if (state.get('selectedVehicle') !== undefined) {
+	        vhe = vhe.set('selectedVehicle', vhe.get('vehicles').find(function (v) {
+	          return v.get('id') === state.get('selectedVehicle').get('id');
+	        }));
+	      }
+
+	      return vhe;
 	    default:
 	      return state;
 	  }
@@ -83755,22 +83794,41 @@
 	  return (new Date(et).getTime() - new Date(st).getTime()) / HOUR;
 	}
 
+	function haversineDist(start, end) {
+	  return (0, _haversine2.default)({
+	    latitude: start.get('lat'),
+	    longitude: start.get('lng')
+	  }, {
+	    latitude: end.get('lat'),
+	    longitude: end.get('lng')
+	  }, {
+	    unit: 'mile'
+	  });
+	}
+
 	function vehicleDistance(vehicle) {
 	  var vs = vehicle.get('stats');
 	  var dist = 0;
-	  for (var i = vs.size - 1; i > 0; i -= 1) {
-	    var p1 = vs.get(i - 1).get('position');
-	    var p2 = vs.get(i).get('position');
-	    var hd = (0, _haversine2.default)({
-	      latitude: p1.get('lat'),
-	      longitude: p1.get('lng')
-	    }, {
-	      latitude: p2.get('lat'),
-	      longitude: p2.get('lng')
-	    }, {
-	      unit: 'mile'
+
+	  vs = vs.update(vs.size - 1, function (v) {
+	    return v.set('speed', 0);
+	  });
+
+	  if (vs.size === 1) {
+	    return vehicle.merge({ stats: vs, speed: 0 });
+	  }
+
+	  var _loop = function _loop(i) {
+	    var hd = haversineDist(vs.get(i - 1).get('position'), vs.get(i).get('position'));
+	    var stepMph = hd / timeToHrs(vs.get(i).get('time'), vs.get(i - 1).get('time'));
+	    vs = vs.update(i - 1, function (v) {
+	      return v.set('speed', stepMph);
 	    });
 	    dist += hd;
+	  };
+
+	  for (var i = vs.size - 1; i > 0; i -= 1) {
+	    _loop(i);
 	  }
 
 	  var st = vs.last().get('time');
@@ -83780,7 +83838,8 @@
 	    startTime: st,
 	    endTime: et,
 	    distance: dist,
-	    speed: dist / timeToHrs(st, et)
+	    speed: dist / timeToHrs(st, et),
+	    stats: vs
 	  };
 
 	  // dist / (new Date(et)).unix() - (new Date(st)).unix()
