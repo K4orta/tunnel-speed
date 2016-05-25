@@ -1,5 +1,5 @@
 import React from 'react';
-import { COLORS_SHORTNAME as colors } from '../../constants/colors';
+import { COLORS_SHORTNAME as colors, speedColor } from '../../constants/colors';
 
 class Vehicle extends React.Component {
   render() {
@@ -20,6 +20,8 @@ class Vehicle extends React.Component {
           transform={`rotate(${v.get('heading')})`}
           onClick={this.props.onClick}
           style={{
+            stroke: speedColor(v.get('speed')),
+            strokeWidth: 2,
             fill: colors[data.get('route')],
             pointerEvents: 'all',
             cursor: 'pointer',

@@ -11,7 +11,7 @@ class VehicleInfo extends React.Component {
         <div>ID: {sv.get('id')}</div>
         <div>Route: {sv.get('route')}</div>
         <div>Speed: {sv.get('speed').toFixed(2)} mph</div>
-        <div>{sv.get('stats').size}</div>
+        <div>Data Points: {sv.get('stats').size}</div>
       </div>
     );
   }

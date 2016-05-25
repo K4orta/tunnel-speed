@@ -14,5 +14,13 @@ export const COLORS_SHORTNAME = {
   M: COLORS_LONGNAME['M-Ocean View'],
 };
 
+export function speedColor(speed) {
+  if (speed < 8) {
+    return 'red';
+  } else if (speed < 12) {
+    return 'orange';
+  }
+  return 'green';
+}
 
 export default COLORS_LONGNAME;

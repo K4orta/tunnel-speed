@@ -1,14 +1,5 @@
 import React from 'react';
-
-function strokeSpeed(speed) {
-  if (speed < 8) {
-    return 'red';
-  } else if (speed < 12) {
-    return 'orange';
-  }
-  return 'green';
-}
-
+import { speedColor } from '../../constants/colors';
 class VehicleTrail extends React.Component {
   render() {
     if (!this.props) return null;
@@ -22,7 +13,7 @@ class VehicleTrail extends React.Component {
     const paths = [];
     tail.forEach((pos, i) => {
       if (tail.has(i + 1) === false) return;
-      const strokeColor = strokeSpeed(this.props.frames.get(i).get('speed'));
+      const strokeColor = speedColor(this.props.frames.get(i).get('speed'));
       paths.push(
         <path
           key={i}
