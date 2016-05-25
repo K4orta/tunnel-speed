@@ -1,5 +1,13 @@
 import React from 'react';
-import haversine from 'haversine';
+
+function strokeSpeed(speed) {
+  if (speed < 8) {
+    return 'red';
+  } else if (speed < 12) {
+    return 'orange';
+  }
+  return 'green';
+}
 
 class VehicleTrail extends React.Component {
   render() {
@@ -11,18 +19,26 @@ class VehicleTrail extends React.Component {
     const tail = positions
       .map(pos => this.props.project([pos.get('lng'), pos.get('lat')]));
 
-    const strokeColor = this.props.data.get('speed') < 7 ? 'red' : 'green';
-
-    return (
-      <g>
+    const paths = [];
+    tail.forEach((pos, i) => {
+      if (tail.has(i + 1) === false) return;
+      const strokeColor = strokeSpeed(this.props.frames.get(i).get('speed'));
+      paths.push(
         <path
-          d={`M${tail.join('L')}`}
+          key={i}
+          d={`M${tail.get(i)}L${tail.get(i + 1)}`}
           style={{
             fill: 'none',
             stroke: strokeColor,
             strokeWidth: 3,
           }}
         />
+      );
+    });
+
+    return (
+      <g>
+        {paths}
       </g>
     );
   }

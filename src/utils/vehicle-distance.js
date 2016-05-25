@@ -27,7 +27,7 @@ export default function vehicleDistance(vehicle) {
   vs = vs.update(vs.size - 1, (v) => v.set('speed', 0));
 
   if (vs.size === 1) {
-    return vehicle.merge({ stats: vs });
+    return vehicle.merge({ stats: vs, speed: 0 });
   }
 
   for (let i = vs.size - 1; i > 0; i -= 1) {
