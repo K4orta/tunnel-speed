@@ -5,20 +5,38 @@ import VehicleTrail from './vehicle-trail';
 
 class Vehicles extends React.Component {
   _redraw({ project }) {
-    const vehicles = this.props.vehicles
-      .map(v => (
-        <Vehicle
-          data={v}
-          project={project}
-          key={`${v.get('route')}-${v.get('id')}`}
-          onClick={() => this.props.selectVehicle(v)}
-        >
-          <VehicleTrail data={v} frames={v.get('stats')} project={project} />
-        </Vehicle>
-      ));
+    const vehicles = [];
+    const trails = [];
+
+    this.props.vehicles
+      .forEach(v => {
+        const id = `${v.get('route')}-${v.get('id')}`;
+        vehicles.push(
+          <Vehicle
+            data={v}
+            project={project}
+            key={id}
+            onClick={() => this.props.selectVehicle(v)}
+          />
+        );
+        trails.push(
+          <VehicleTrail
+            data={v}
+            frames={v.get('stats')}
+            project={project}
+            key={id}
+          />
+        );
+      });
+
     return (
       <g>
-        {vehicles}
+        <g className="trail-layer">
+          {trails}
+        </g>
+        <g className="vehicle-layer">
+          {vehicles}
+        </g>
       </g>
     );
   }

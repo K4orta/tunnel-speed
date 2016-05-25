@@ -8,21 +8,31 @@ function timeToHrs(st, et) {
   return ((new Date(et).getTime()) - (new Date(st).getTime())) / HOUR;
 }
 
+function haversineDist(start, end) {
+  return haversine({
+    latitude: start.get('lat'),
+    longitude: start.get('lng'),
+  }, {
+    latitude: end.get('lat'),
+    longitude: end.get('lng'),
+  }, {
+    unit: 'mile',
+  });
+}
+
 export default function vehicleDistance(vehicle) {
-  const vs = vehicle.get('stats');
+  let vs = vehicle.get('stats');
   let dist = 0;
+
+  vs = vs.update(vs.size - 1, (v) => v.set('distance', 0));
+
+  if (vs.size === 1) {
+    return vehicle.merge({ stats: vs });
+  }
+
   for (let i = vs.size - 1; i > 0; i -= 1) {
-    const p1 = vs.get(i - 1).get('position');
-    const p2 = vs.get(i).get('position');
-    const hd = haversine({
-      latitude: p1.get('lat'),
-      longitude: p1.get('lng'),
-    }, {
-      latitude: p2.get('lat'),
-      longitude: p2.get('lng'),
-    }, {
-      unit: 'mile',
-    });
+    const hd = haversineDist(vs.get(i - 1).get('position'), vs.get(i).get('position'));
+    vs = vs.update(i - 1, (v) => v.set('distance', hd));
     dist += hd;
   }
 
@@ -34,6 +44,7 @@ export default function vehicleDistance(vehicle) {
     endTime: et,
     distance: dist,
     speed: dist / timeToHrs(st, et),
+    stats: vs,
   };
 
   // dist / (new Date(et)).unix() - (new Date(st)).unix()

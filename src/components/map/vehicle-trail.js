@@ -11,7 +11,7 @@ class VehicleTrail extends React.Component {
     const tail = positions
       .map(pos => this.props.project([pos.get('lng'), pos.get('lat')]));
 
-    const strokeColor = this.props.data.get('speed') < 8 ? 'red' : 'green';
+    const strokeColor = this.props.data.get('speed') < 7 ? 'red' : 'green';
 
     return (
       <g>
