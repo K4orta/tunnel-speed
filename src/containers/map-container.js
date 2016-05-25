@@ -7,7 +7,7 @@ import Map from '../components/map/map';
 const mapStateToProps = (state) => {
   return {
     map: state.map,
-    vehicles: state.vehicles,
+    vehicles: state.vehicles.get('vehicles'),
   };
 };
 

@@ -5,7 +5,7 @@ import colors from '../../constants/colors';
 import alphaify from 'alphaify';
 
 const ROUTE_WIDTH = 2;
-const ROUTE_OPACITY = 0.25;
+const ROUTE_OPACITY = 0.20;
 
 class RouteMap extends React.Component {
   _formatLineSegment(points, route, index) {

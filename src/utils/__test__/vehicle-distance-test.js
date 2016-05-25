@@ -2,10 +2,8 @@ import Immutable from 'immutable';
 const vehicle = Immutable.fromJS(require('./vehicle-fixture.json'));
 import vehicleDistance from '../vehicle-distance';
 
-
-
 describe('The Distance Calculation Utility', () => {
-  let fixture = vehicleDistance(vehicle);
+  const fixture = vehicleDistance(vehicle);
 
   it('has a start time', () => {
     const vStats = vehicle.get('stats');
