@@ -20297,6 +20297,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.speedColor = speedColor;
 	var COLORS_LONGNAME = {
 	  'L-Taraval': 'purple',
 	  'N-Judah': 'blue',
@@ -20312,6 +20313,15 @@
 	  KT: COLORS_LONGNAME['KT-Ingleside/Third Street'],
 	  M: COLORS_LONGNAME['M-Ocean View']
 	};
+
+	function speedColor(speed) {
+	  if (speed < 8) {
+	    return 'red';
+	  } else if (speed < 12) {
+	    return 'orange';
+	  }
+	  return 'green';
+	}
 
 	exports.default = COLORS_LONGNAME;
 
@@ -31825,6 +31835,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _colors = __webpack_require__(104);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31832,15 +31844,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function strokeSpeed(speed) {
-	  if (speed < 8) {
-	    return 'red';
-	  } else if (speed < 12) {
-	    return 'orange';
-	  }
-	  return 'green';
-	}
 
 	var VehicleTrail = function (_React$Component) {
 	  _inherits(VehicleTrail, _React$Component);
@@ -31868,7 +31871,7 @@
 	      var paths = [];
 	      tail.forEach(function (pos, i) {
 	        if (tail.has(i + 1) === false) return;
-	        var strokeColor = strokeSpeed(_this2.props.frames.get(i).get('speed'));
+	        var strokeColor = (0, _colors.speedColor)(_this2.props.frames.get(i).get('speed'));
 	        paths.push(_react2.default.createElement('path', {
 	          key: i,
 	          d: 'M' + tail.get(i) + 'L' + tail.get(i + 1),
@@ -31956,6 +31959,8 @@
 	          transform: 'rotate(' + v.get('heading') + ')',
 	          onClick: this.props.onClick,
 	          style: {
+	            stroke: (0, _colors.speedColor)(v.get('speed')),
+	            strokeWidth: 2,
 	            fill: _colors.COLORS_SHORTNAME[data.get('route')],
 	            pointerEvents: 'all',
 	            cursor: 'pointer'
@@ -32214,6 +32219,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          null,
+	          'Data Points: ',
 	          sv.get('stats').size
 	        )
 	      );
