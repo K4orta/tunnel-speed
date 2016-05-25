@@ -24,7 +24,7 @@ export default function vehicleDistance(vehicle) {
   let vs = vehicle.get('stats');
   let dist = 0;
 
-  vs = vs.update(vs.size - 1, (v) => v.set('distance', 0));
+  vs = vs.update(vs.size - 1, (v) => v.set('speed', 0));
 
   if (vs.size === 1) {
     return vehicle.merge({ stats: vs });
@@ -32,7 +32,8 @@ export default function vehicleDistance(vehicle) {
 
   for (let i = vs.size - 1; i > 0; i -= 1) {
     const hd = haversineDist(vs.get(i - 1).get('position'), vs.get(i).get('position'));
-    vs = vs.update(i - 1, (v) => v.set('distance', hd));
+    const stepMph = hd / timeToHrs(vs.get(i).get('time'), vs.get(i - 1).get('time'));
+    vs = vs.update(i - 1, (v) => v.set('speed', stepMph));
     dist += hd;
   }
 
