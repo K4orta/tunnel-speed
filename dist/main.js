@@ -20315,7 +20315,7 @@
 	};
 
 	function speedColor(speed) {
-	  if (speed < 8) {
+	  if (speed < 7) {
 	    return 'red';
 	  } else if (speed < 12) {
 	    return 'orange';
